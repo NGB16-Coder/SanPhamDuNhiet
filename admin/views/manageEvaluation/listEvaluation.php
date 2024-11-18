@@ -16,7 +16,8 @@
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1><a
-              href="<?= BASE_URL_ADMIN . '?act=listCategory' ?>">Quản Lý Tài Khoản</a></h1>
+              href="<?= BASE_URL_ADMIN . '?act=listCategory' ?>">Quản
+              Lý Tài Khoản</a></h1>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -28,7 +29,7 @@
       <div class="row">
         <div class="col-12">
 
-          
+
           <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
@@ -46,17 +47,22 @@
                 <tbody>
                   <?php foreach ($listEvaluation as $Evaluation): ?>
                   <tr>
-                    <td><?= $Evaluation['dg_id'] ?>
+                    <td>
+                      <?= $Evaluation['dg_id'] ?>
                     </td>
-                    <td><?= $Evaluation['noi_dung'] ?>
+                    <td>
+                      <?= $Evaluation['noi_dung'] ?>
                     </td>
-                    <td><?= $Evaluation['so_sao'] ?>
-                    
-                    
-                    <td><?= $Evaluation['ngay_tao'] ?>
+                    <td>
+                      <?= $Evaluation['so_sao'] ?>
+
+
+                    <td>
+                      <?= $Evaluation['ngay_tao'] ?>
                     </td>
-                    <td><?= $Evaluation['ngay_update'] ?>
-                    </td> 
+                    <td>
+                      <?= $Evaluation['ngay_update'] ?>
+                    </td>
                     <td>
                       <a href="<?= BASE_URL_ADMIN .'?act=deleteEvaluation&id='.$Evaluation['dg_id'] ?>"
                         onclick="return confirm('Bạn có chắc chắn xóa hay không?')"><button
@@ -67,7 +73,7 @@
                   <?php endforeach ?>
                 </tbody>
                 <tfoot>
-                <tr>
+                  <tr>
                     <th>ID</th>
                     <th>Nội Dung</th>
                     <th>Số Sao</th>

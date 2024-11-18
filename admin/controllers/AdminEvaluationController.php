@@ -2,27 +2,28 @@
 
 class AdminEvaluationController
 {
-    public $modelevaluation;
- 
+    public $modelDanhGia;
+
     public function __construct()
     {
-        $this->modelevaluation = new AdminEvaluation();
-        
+        $this->modelDanhGia = new AdminEvaluation();
+
     }
-    public function listEvaluation(){
-        
-            $listEvaluation = $this->modelevaluation->getAllEvaluation();
-            require_once "./views/manageEvaluation/listEvaluation.php";
-        
+    public function listEvaluation()
+    {
+
+        $listEvaluation = $this->modelDanhGia->getAllEvaluation();
+        require_once "./views/manageEvaluation/listEvaluation.php";
+
     }
-   
+
     public function deleteEvaluation()
     {
-        // Lấy ra thông tin danh mục cần xóa
+        // Lấy ra thông tin đánh giá cần xóa
         $dg_id = $_GET['id'];
-       
+
         if ($dg_id) {
-            $this->modelevaluation->deleteEvaluation($dg_id);
+            $this->modelDanhGia->deleteEvaluation($dg_id);
             header('location: '.BASE_URL_ADMIN.'?act=listEvaluation');
             exit();
         } else {
