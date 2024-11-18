@@ -11,12 +11,14 @@ require_once './controllers/AdminCategoryController.php';
 require_once './controllers/AdminProductController.php';
 require_once './controllers/HomeAdminController.php';
 require_once './controllers/AdminUserController.php';
+require_once './controllers/AdminEvaluationController.php';
 
 
 // Require toàn bộ file Models
 require_once './models/AdminCategory.php';
 require_once './models/AdminProduct.php';
 require_once './models/AdminUser.php';
+require_once './models/AdminEvaluation.php';
 
 
 // Route
@@ -46,4 +48,8 @@ match ($act) {
     // router user
     'listUser' => (new AdminUserController())->listUser(),
     'deleteUser' => (new AdminUserController())->deleteUser(),
+
+    // router Evaluation
+    'listEvaluation' => (new AdminEvaluationController())->listEvaluation(),
+    'deleteEvaluation' => (new AdminEvaluationController())->deleteEvaluation(),
 };

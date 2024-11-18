@@ -5,9 +5,9 @@
 // Khai báo dưới dạng HẰNG SỐ để không phải dùng $GLOBALS
 
 // đường dẫn vào client
-define('BASE_URL', 'http://localhost/da1/Web-CDN/');
+define('BASE_URL', 'http://localhost/da1/SanPhamDuNhiet/');
 // đường dẫn vào admin
-define('BASE_URL_ADMIN', 'http://localhost/da1/Web-CDN/admin/');
+define('BASE_URL_ADMIN', 'http://localhost/da1/SanPhamDuNhiet/admin/');
 
 define('DB_HOST', 'localhost');
 define('DB_PORT', 3306);

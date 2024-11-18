@@ -1,4 +1,6 @@
-<?php class AdminEvaluation
+<?php
+
+class AdminEvaluation
 {
     public $conn;
 
@@ -10,7 +12,6 @@
     {
         try {
             $sql = 'SELECT *FROM danh_gia';
-            
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
@@ -18,7 +19,7 @@
             echo 'Lỗi getAllProduct() '.$e->getMessage();
         }
     }
-    
+
     public function deleteEvaluation($dg_id)
     {
         try {
@@ -27,11 +28,10 @@
             $stmt->execute([
                 ':dg_id' => $dg_id
             ]);
-           
+
             return true;
         } catch (Exception $e) {
-            echo 'Lỗi deleteUser() '.$e->getMessage();
+            echo 'Lỗi deleteDanhGia() '.$e->getMessage();
         }
     }
 }
-?>
