@@ -16,8 +16,7 @@
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1><a
-              href="<?= BASE_URL_ADMIN . '?act=listCategory' ?>">Quản
-              Lý Tài Khoản</a></h1>
+              href="<?= BASE_URL_ADMIN . '?act=listEvaluation' ?>">Quản Lý Đánh Giá</a></h1>
         </div>
       </div>
     </div><!-- /.container-fluid -->

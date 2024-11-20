@@ -12,6 +12,7 @@ require_once './controllers/AdminProductController.php';
 require_once './controllers/HomeAdminController.php';
 require_once './controllers/AdminUserController.php';
 require_once './controllers/AdminEvaluationController.php';
+require_once './controllers/AdminCommentController.php';
 
 
 // Require toàn bộ file Models
@@ -19,6 +20,7 @@ require_once './models/AdminCategory.php';
 require_once './models/AdminProduct.php';
 require_once './models/AdminUser.php';
 require_once './models/AdminEvaluation.php';
+require_once './models/AdminComment.php';
 
 
 // Route
@@ -52,4 +54,8 @@ match ($act) {
     // router Evaluation
     'listEvaluation' => (new AdminEvaluationController())->listEvaluation(),
     'deleteEvaluation' => (new AdminEvaluationController())->deleteEvaluation(),
+
+    //router bình luận
+    'listComment' => (new AdminCommentController())->listComment(),
+    'deleteComment' => (new AdminCommentController())->deleteComment(),
 };
