@@ -16,7 +16,7 @@
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1><a
-              href="<?= BASE_URL_ADMIN . '?act=listUser' ?>">Quản Lý Tài Khoản</a></h1>
+              href="<?= BASE_URL_ADMIN . '?act=listComment' ?>">Quản Lý Bình Luận</a></h1>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -36,40 +36,24 @@
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Địa chỉ</th>
-                    <th>email</th>
-                    <th>Sđt</th>
-                    <th>Mật khẩu</th>
-                    
-                    <th>Ngày Tạo</th>
+                    <th>Nội Dung</th>
+                    <th>Ngày Bình Luận</th>
                     <th>Ngày update</th>
-                    
                     <th>Chức Năng</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($listUser as $User): ?>
+                  <?php foreach ($listComment as $Comment): ?>
                   <tr>
-                    <td><?= $User['tk_id'] ?>
+                    <td><?= $Comment['bl_id'] ?>
                     </td>
-                    <td><?= $User['ho_ten'] ?>
+                    <td><?= $Comment['noi_dung'] ?>
+                    <td><?= $Comment['ngay_tao'] ?>
                     </td>
-                    <td><?= $User['dia_chi'] ?>
-                    </td>
-                    <td><?= $User['email'] ?>
-                    </td>
-                    <td><?= $User['sdt'] ?>
-                    </td>
-                    <td><?= $User['mat_khau'] ?>
-                    </td>
-                    
-                    <td><?= $User['ngay_tao'] ?>
-                    </td>
-                    <td><?= $User['ngay_update'] ?>
+                    <td><?= $Comment['ngay_update'] ?>
                     </td> 
                     <td>
-                      <a href="<?= BASE_URL_ADMIN .'?act=deleteUser&id='.$User['tk_id'] ?>"
+                      <a href="<?= BASE_URL_ADMIN .'?act=deleteComment&id='.$Comment['bl_id'] ?>"
                         onclick="return confirm('Bạn có chắc chắn xóa hay không?')"><button
                           class="btn btn-danger">Xóa</button></a>
                     </td>
@@ -80,15 +64,9 @@
                 <tfoot>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Địa chỉ</th>
-                    <th>email</th>
-                    <th>Sđt</th>
-                    <th>Mật khẩu</th>
-                  
-                    <th>Ngày Tạo</th>
+                    <th>Nội Dung</th>
+                    <th>Ngày Bình Luận</th>
                     <th>Ngày update</th>
-                    
                     <th>Chức Năng</th>
                   </tr>
                 </tfoot>
