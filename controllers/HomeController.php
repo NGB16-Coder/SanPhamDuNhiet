@@ -5,13 +5,13 @@ class HomeController
 {
     public $product;
     public $category;
-    public $user;
+    public $taikhoan;
 
     public function __construct()
     {
         $this->product = new Product();
         $this->category = new Category();
-        $this->user = new User();
+        $this->taikhoan = new taikhoan();
     }
     public function trangchu()
     {
@@ -40,31 +40,31 @@ class HomeController
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // lấy email và pass gửi lên form
             $email = $_POST['email'];
-            $password = $_POST['password'];
+            $mat_khau = $_POST['mat_khau'];
             // var_dump($email);die;
             // Ghi nhớ tài khoản
             if (isset($_POST['rememberMe'])) {
                 setcookie("email", $email, time() + 86400 * 7);
-                setcookie("password", $password, time() + 86400 * 7);
+                setcookie("mat_khau", $mat_khau, time() + 86400 * 7);
             }
 
             // Kiểm tra thông tin đăng nhập
-            $user = $this->user->checkLogin($email, $password);
-            // var_dump($user);
+            $taikhoan = $this->taikhoan->checkLogin($email, $mat_khau);
+            // var_dump($taikhoan);
             // die;
-            if ($user === $email) { // đăng nhập thành công
+            if ($taikhoan === $email) { // đăng nhập thành công
                 // Lưu thông tin vào session
-                $_SESSION['user_admin'] = $user;
-                // var_dump($_SESSION['user_admin']);die;
+                $_SESSION['taikhoan_admin'] = $taikhoan;
+                // var_dump($_SESSION['taikhoan_admin']);die;
                 header('location:'. BASE_URL_ADMIN);
                 exit();
-            } elseif ($user == 'Trang client') {
-                $_SESSION['user'] = $email;
+            } elseif ($taikhoan == 'Trang client') {
+                $_SESSION['taikhoan'] = $email;
                 header('location:'. BASE_URL);
                 exit();
             } else {
                 // Lỗi thì lưu vào session
-                $_SESSION['error'] = $user ?? '';
+                $_SESSION['error'] = $taikhoan ?? '';
 
                 $_SESSION['flash'] = true;
                 header('location:'.BASE_URL . '?act=dang-nhap');
@@ -84,55 +84,55 @@ class HomeController
     public function dangKy()
     {
 
-        $listUser = $this->user->getAllUser();
+        $listtaikhoan = $this->taikhoan->getAlltaikhoan();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $fullname = $_POST['fullname'];
+            $ho_ten = $_POST['ho_ten'];
+            $dia_chi = $_POST['dia_chi'];
             $email = $_POST['email'];
-            $phone_number = $_POST['phone_number'];
-            $address = $_POST['address'];
-            $password = $_POST['password'];
-            $repassword = $_POST['repassword'];
+            $sdt = $_POST['sdt'];
+            $mat_khau = $_POST['mat_khau'];
+            $remat_khau = $_POST['remat_khau'];
 
             $errors = [];
-            if (empty($fullname)) {
-                $errors['fullname'] = 'Vui lòng nhập tên đăng nhập!';
+            if (empty($ho_ten)) {
+                $errors['ho_ten'] = 'Vui lòng nhập tên đăng nhập!';
             }
             if (empty($email)) {
                 $errors['email'] = 'Vui lòng nhập Email!';
             }
-            if (empty($phone_number)) {
-                $errors['phone_number'] = 'Vui lòng nhập số điện thoại!';
+            if (empty($sdt)) {
+                $errors['sdt'] = 'Vui lòng nhập số điện thoại!';
             }
-            if (empty($address)) {
-                $errors['address'] = 'Vui lòng nhập địa chỉ nơi trú!';
+            if (empty($dia_chi)) {
+                $errors['dia_chi'] = 'Vui lòng nhập địa chỉ nơi trú!';
             }
-            if (empty($password)) {
-                $errors['password'] = 'Vui lòng nhập mật khẩu!';
+            if (empty($mat_khau)) {
+                $errors['mat_khau'] = 'Vui lòng nhập mật khẩu!';
             }
-            if (empty($repassword)) {
-                $errors['repassword'] = 'Vui lòng nhập lại mật khẩu!';
-            } elseif ($password !== $repassword) {
-                $errors['checkpassword'] = 'Mật khẩu không giống nhau';
+            if (empty($remat_khau)) {
+                $errors['remat_khau'] = 'Vui lòng nhập lại mật khẩu!';
+            } elseif ($mat_khau !== $remat_khau) {
+                $errors['checkmat_khau'] = 'Mật khẩu không giống nhau';
             }
 
             // lưu input vào session khi lỗi không cần nhập lại
-            $_SESSION['fullname'] = $fullname;
+            $_SESSION['ho_ten'] = $ho_ten;
             $_SESSION['email'] = $email;
-            $_SESSION['phone_number'] = $phone_number;
-            $_SESSION['address'] = $address;
-            $_SESSION['password'] = $password;
-            $_SESSION['repassword'] = $repassword;
+            $_SESSION['sdt'] = $sdt;
+            $_SESSION['dia_chi'] = $dia_chi;
+            $_SESSION['mat_khau'] = $mat_khau;
+            $_SESSION['remat_khau'] = $remat_khau;
 
             // Kiểm tra xem đã tồn tại email hoặc sdt chưa
-            foreach ($listUser as $user) {
-                $user['email'];
-                $user['phone_number'];
-                if ($email === $user['email']) {
+            foreach ($listtaikhoan as $taikhoan) {
+                $taikhoan['email'];
+                $taikhoan['sdt'];
+                if ($email === $taikhoan['email']) {
                     $errors['email'] = 'Email đã được đăng ký!';
                 }
-                if ($phone_number === $user['phone_number']) {
-                    $errors['phone_number'] = 'Số điện thoại đã được đăng ký';
+                if ($sdt === $taikhoan['sdt']) {
+                    $errors['sdt'] = 'Số điện thoại đã được đăng ký';
                 }
             }
 
@@ -141,7 +141,7 @@ class HomeController
             if (empty($errors)) {
                 // Nếu errors rỗng thì tiến hành thêm
 
-                $this->user->insertUser($fullname, $email, $phone_number, $address, $password);
+                $this->taikhoan->inserttaikhoan($ho_ten, $email, $sdt, $dia_chi, $mat_khau);
                 session_unset();
                 session_destroy();
                 echo '<script language="javascript">alert("Đăng ký thành công!"); window.location="?act=dang-nhap";</script>';
