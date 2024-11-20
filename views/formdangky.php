@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Đăng nhập</title>
+    <title>Đăng ký</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -55,7 +55,7 @@
                                     <li class="breadcrumb-item"><a
                                             href="<?= BASE_URL?>"><i
                                                 class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Đăng nhập</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Đăng ký</li>
                                 </ul>
                             </nav>
                         </div>
@@ -74,34 +74,93 @@
                         <div class="col-lg-7 ">
                             <div class="login-reg-form-wrap">
                                 <h5>Đăng Ký</h5>
-                                <form action="#" method="post">
+                                <form
+                                    action="<?= BASE_URL.'?act=check-dang-ky' ?>"
+                                    method="post">
                                     <div class="single-input-item">
-                                        <input type="text" placeholder="Họ và tên" required />
+                                        <input type="text" placeholder="Tên đăng nhập" name="ho_ten" value="<?php if (isset($_SESSION['ho_ten'])) {
+                                            echo $_SESSION['ho_ten'];
+                                        } ?>">
+                                        <?php if (isset($_SESSION['error']['ho_ten'])) { ?>
+                                        <p class="text-danger">
+                                            <?= $_SESSION['error']['ho_ten'] ?>
+                                        </p>
+                                        <?php } ?>
                                     </div>
                                     <div class="single-input-item">
-                                        <input type="email" placeholder="email@gmail.com" required />
+                                        <input type="email" placeholder="email@gmail.com" name="email" value="<?php if (isset($_SESSION['email'])) {
+                                            echo $_SESSION['email'];
+                                        } ?>">
+                                        <?php if (isset($_SESSION['error']['email'])) { ?>
+                                        <p class="text-danger">
+                                            <?= $_SESSION['error']['email'] ?>
+                                        </p>
+                                        <?php } ?>
                                     </div>
                                     <div class="single-input-item">
-                                        <input type="text" placeholder="Số điện thoại" required />
+                                        <input type="text" placeholder="Số điện thoại" name="sdt" value="<?php if (isset($_SESSION['sdt'])) {
+                                            echo $_SESSION['sdt'];
+                                        } ?>">
+                                        <?php if (isset($_SESSION['error']['sdt'])) { ?>
+                                        <p class="text-danger">
+                                            <?= $_SESSION['error']['sdt'] ?>
+                                        </p>
+                                        <?php } ?>
                                     </div>
                                     <div class="single-input-item">
-                                        <input type="text" placeholder="Địa chỉ" required />
+                                        <input type="text" placeholder="Địa chỉ nơi trốn" name="dia_chi" value="<?php if (isset($_SESSION['dia_chi'])) {
+                                            echo $_SESSION['dia_chi'];
+                                        } ?>">
+                                        <?php if (isset($_SESSION['error']['dia_chi'])) { ?>
+                                        <p class="text-danger">
+                                            <?= $_SESSION['error']['dia_chi'] ?>
+                                        </p>
+                                        <?php } ?>
                                     </div>
-                                    <div class="single-input-item">
-                                        <input type="password" placeholder="Mật khẩu" required />
-                                    </div>
-                                    <div class="single-input-item">
-                                        <input type="password" placeholder="Nhập lại mật khẩu" required />
-                                    </div>
-                                    <div class="single-input-item">
-                                        <div>
-                                            <p>Bạn đã có tài khoản? <a href="#" style="font-size: 14px;"
-                                                    class="forget-pwd">Đăng nhập ngay</a></p>
-
+                                    <div class="flex mb">
+                                        <div class="col-lg-12">
+                                            <div class="single-input-item">
+                                                <input type="password" placeholder="Mật khẩu" name="mat_khau" value="<?php if (isset($_SESSION['mat_khau'])) {
+                                                    echo $_SESSION['mat_khau'];
+                                                } ?>">
+                                                <?php if (isset($_SESSION['error']['mat_khau'])) { ?>
+                                                <p class="text-danger">
+                                                    <?= $_SESSION['error']['mat_khau'] ?>
+                                                </p>
+                                                <?php } ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="single-input-item">
+                                                <input type="password" placeholder="Nhập lại mật khẩu" name="remat_khau"
+                                                    value="<?php if (isset($_SESSION['remat_khau'])) {
+                                                        echo $_SESSION['remat_khau'];
+                                                    } ?>">
+                                                <?php if (isset($_SESSION['error']['remat_khau'])) { ?>
+                                                <p class="text-danger">
+                                                    <?= $_SESSION['error']['remat_khau'] ?>
+                                                </p>
+                                                <?php } ?>
+                                                <?php if (isset($_SESSION['error']['checkmat_khau'])) { ?>
+                                                <p class="text-danger">
+                                                    <?= $_SESSION['error']['checkmat_khau'] ?>
+                                                </p>
+                                                <?php } ?>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="single-input-item">
-                                        <button class="btn btn-sqr">Đăng ký</button>
+                                        <div
+                                            class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                            <div class="remember-meta">
+                                                <button type="submit" class="btn btn-sqr">Đăng ký</button>
+                                            </div>
+                                            <span>Bạn đã có tài khoản? <br>Mời đến trang <a style="font-size: 16px;"
+                                                    href="<?=BASE_URL.'?act=dang-nhap'?>"
+                                                    class="forget-pwd">Đăng nhập</a> </span>
+
+
+                                        </div>
                                     </div>
                                 </form>
                             </div>

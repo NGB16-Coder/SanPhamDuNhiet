@@ -1,6 +1,6 @@
 <?php
 
-class User
+class Taikhoan
 {
     public $conn;
 
@@ -9,19 +9,19 @@ class User
         $this->conn = connectDB();
     }
 
-    public function checkLogin($email, $password)
+    public function checkLogin($email, $mat_khau)
     {
         try {
-            $sql = "SELECT * FROM user WHERE email= :email";
+            $sql = "SELECT * FROM taikhoan WHERE email= :email";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute(['email' => $email]);
-            $user = $stmt->fetch();
-            // var_dump($user);
-            if ($email == "" || $password == "") {
+            $taikhoan = $stmt->fetch();
+            // var_dump($taikhoan);
+            if ($email == "" || $mat_khau == "") {
                 return "Vui lòng nhập đầy đủ email và mật khẩu!";
-            } elseif (($email === $user['email']) && ($password === $user['password'])) {
-                if ($user['role_id'] === 1) {
-                    return $user['email']; // đăng nhập vào trang admin
+            } elseif (($email === $taikhoan['email']) && ($mat_khau === $taikhoan['mat_khau'])) {
+                if ($taikhoan['role'] === 0) {
+                    return $taikhoan['email']; // đăng nhập vào trang admin
 
                 } else {
                     return 'Trang client'; // đăng nhập vào trang client
@@ -35,29 +35,29 @@ class User
         }
     }
 
-    public function insertUser($fullname, $email, $phone_number, $address, $password)
+    public function inserttaikhoan($ho_ten, $email, $sdt, $dia_chi, $mat_khau)
     {
         try {
-            $sql = "INSERT INTO user(fullname, email, phone_number, address, password) 
-                    VALUES (:fullname,:email,:phone_number,:address,:password)";
+            $sql = "INSERT INTO taikhoan(ho_ten, email, sdt, dia_chi, mat_khau) 
+                    VALUES (:ho_ten,:email,:sdt,:dia_chi,:mat_khau)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
-                ':fullname' => $fullname,
+                ':ho_ten' => $ho_ten,
                 ':email' => $email,
-                ':phone_number' => $phone_number,
-                ':address' => $address,
-                ':password' => $password,
+                ':sdt' => $sdt,
+                ':dia_chi' => $dia_chi,
+                ':mat_khau' => $mat_khau,
             ]);
             return true;
         } catch (Exception $e) {
-            echo 'Lỗi insetUser() '.$e->getMessage();
+            echo 'Lỗi insettaikhoan() '.$e->getMessage();
         }
     }
 
-    public function getAllUser()
+    public function getAlltaikhoan()
     {
         try {
-            $sql = "SELECT * FROM user";
+            $sql = "SELECT * FROM taikhoan";
 
             $stmt = $this->conn->prepare($sql);
 
@@ -65,7 +65,7 @@ class User
 
             return $stmt->fetchAll();
         } catch (Exception $e) {
-            echo 'Lỗi getAllUser() '.$e->getMessage();
+            echo 'Lỗi getAlltaikhoan() '.$e->getMessage();
         }
     }
 }

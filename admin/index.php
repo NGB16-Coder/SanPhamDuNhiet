@@ -27,6 +27,14 @@ $act = $_GET['act'] ?? '/';
 // Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 
 match ($act) {
+    // router đăng nhập/đăng ký
+    'dang-nhap' => (new HomeController())->formDangNhap(),
+    'check-dang-nhap' => (new HomeController())->dangNhap(),
+    'dang-ky' => (new HomeController())->formDangKy(),
+    'check-dang-ky' => (new HomeController())->dangKy(),
+    'dang-xuat' => (new HomeController())->logout(),
+    'xoa-ghi-nho' => (new HomeController())->xoaCookie(),
+
     // router danh mục
     '/' => (new HomeAdminController())->home(),
     'listCategory' => (new AdminCategoryController())->listCategory(),
