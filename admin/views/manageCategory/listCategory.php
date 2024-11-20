@@ -47,16 +47,17 @@
                 <tbody>
                   <?php foreach ($listCategory as $category): ?>
                   <tr>
-                    <td><?= $category['id'] ?>
+                    <td><?= $category['dm_id'] ?>
                     </td>
-                    <td><?= $category['name'] ?>
+                    <td>
+                      <?= $category['ten_dm'] ?>
                     </td>
                     <td>
                       <a
-                        href="<?= BASE_URL_ADMIN.'?act=formEditCategory&id='.$category['id']; ?>"><button
+                        href="<?= BASE_URL_ADMIN.'?act=formEditCategory&id='.$category['dm_id']; ?>"><button
                           class="btn btn-warning">Sửa</button></a>
 
-                      <a href="<?= BASE_URL_ADMIN.'?act=xoaCategory&id='.$category['id']; ?>"
+                      <a href="<?= BASE_URL_ADMIN.'?act=xoaCategory&id='.$category['dm_id']; ?>"
                         onclick="return confirm('Bạn có chắc chắn xóa hay không?')"><button
                           class="btn btn-danger">Xóa</button></a>
                     </td>
