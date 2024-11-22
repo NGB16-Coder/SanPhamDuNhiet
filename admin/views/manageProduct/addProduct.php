@@ -43,86 +43,99 @@
                             <div class="card-body row">
                                 <!-- Tên sản phẩm -->
                                 <div class="form-group col-12">
-                                    <label for="title">Tên Sản Phẩm</label>
-                                    <input type="text" name="title" class="form-control" id="title"
+                                    <label for="ten_sp">Tên Sản Phẩm</label>
+                                    <input type="text" name="ten_sp" class="form-control" id="ten_sp"
                                         placeholder="Tên Sản Phẩm">
-                                    <?php if (isset($_SESSION['error']['title'])) { ?>
+                                    <?php if (isset($_SESSION['error']['ten_sp'])) { ?>
                                     <p class="text-danger">
-                                        <?= $_SESSION['error']['title'] ?>
+                                        <?= $_SESSION['error']['ten_sp'] ?>
                                     </p>
                                     <?php } ?>
                                 </div>
 
                                 <!-- Giá -->
                                 <div class="form-group col-6">
-                                    <label for="price">Giá Sản Phẩm</label>
-                                    <input type="number" name="price" min="0" class="form-control" id="price"
+                                    <label for="gia_sp">Giá Sản Phẩm</label>
+                                    <input type="number" name="gia_sp" min="0" class="form-control" id="gia_sp"
                                         placeholder="Giá">
-                                    <?php if (isset($_SESSION['error']['price'])) { ?>
+                                    <?php if (isset($_SESSION['error']['gia_sp'])) { ?>
                                     <p class="text-danger">
-                                        <?= $_SESSION['error']['price'] ?>
+                                        <?= $_SESSION['error']['gia_sp'] ?>
                                     </p>
                                     <?php } ?>
                                 </div>
 
                                 <!-- Giá khuyến mãi -->
                                 <div class="form-group col-6">
-                                    <label for="discount">Giá Khuyến Mãi</label>
-                                    <input type="number" name="discount" min="0" class="form-control" id="discount"
+                                    <label for="km_sp">Giá Khuyến Mãi</label>
+                                    <input type="number" name="km_sp" min="0" class="form-control" id="km_sp"
                                         placeholder="Giá Khuyến Mãi">
-                                    <?php if (isset($_SESSION['error']['discount'])) { ?>
+                                    <?php if (isset($_SESSION['error']['km_sp'])) { ?>
                                     <p class="text-danger">
-                                        <?= $_SESSION['error']['discount'] ?>
+                                        <?= $_SESSION['error']['km_sp'] ?>
                                     </p>
                                     <?php } ?>
                                 </div>
 
                                 <!-- Danh mục -->
                                 <div class="form-group col-6">
-                                    <label for="category_id">Thuộc Danh Mục</label>
-                                    <select class="form-control" name="category_id" id="category_id">
+                                    <label for="dm_id">Thuộc Danh Mục</label>
+                                    <select class="form-control" name="dm_id" id="dm_id">
                                         <option selected disabled>Chọn danh mục sản phẩm</option>
                                         <?php foreach ($listCategory as $danhMuc): ?>
                                         <option
-                                            value="<?= $danhMuc['id'] ?>">
-                                            <?= $danhMuc['name'] ?>
+                                            value="<?= $danhMuc['dm_id'] ?>">
+                                            <?= $danhMuc['ten_dm'] ?>
                                         </option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <?php if (isset($_SESSION['error']['category_id'])) { ?>
+                                    <?php if (isset($_SESSION['error']['dm_id'])) { ?>
                                     <p class="text-danger">
-                                        <?= $_SESSION['error']['category_id'] ?>
+                                        <?= $_SESSION['error']['dm_id'] ?>
                                     </p>
                                     <?php } ?>
                                 </div>
 
                                 <!-- Ảnh sản phẩm -->
                                 <div class="mb-3 col-6">
-                                    <label for="thumbnail" class="form-label">Ảnh sản phẩm</label>
-                                    <input type="file" name="thumbnail" class="form-control" id="thumbnail"
+                                    <label for="img_sp" class="form-label">Ảnh sản phẩm</label>
+                                    <input type="file" name="img_sp" class="form-control" id="img_sp"
                                         placeholder="Ảnh sản phẩm">
-                                    <?php if (isset($_SESSION['error']['thumbnail'])) { ?>
+                                    <?php if (isset($_SESSION['error']['img_sp'])) { ?>
                                     <p class="text-danger">
-                                        <?= $_SESSION['error']['thumbnail'] ?>
+                                        <?= $_SESSION['error']['img_sp'] ?>
                                     </p>
                                     <?php } ?>
                                 </div>
 
-                                <!-- Ngày nhập -->
+                                <!-- Size -->
                                 <div class="form-group col-6">
-                                    <label for="update_at">Ngày Nhập</label>
-                                    <input type="date" name="update_at" class="form-control" id="update_at">
-                                    <?php if (isset($_SESSION['error']['update_at'])): ?>
+                                    <label for="size_id">Size</label>
+                                    <select class="form-control" name="size_id" id="size_id">
+                                        <option selected disabled>Chọn size sản phẩm</option>
+
+                                        <option value="1">
+                                            M
+                                        </option>
+                                        <option value="2">
+                                            L
+                                        </option>
+                                        <option value="3">
+                                            XL
+                                        </option>
+
+                                    </select>
+                                    <?php if (isset($_SESSION['error']['size_id'])) { ?>
                                     <p class="text-danger">
-                                        <?= $_SESSION['error']['update_at'] ?>
+                                        <?= $_SESSION['error']['size_id'] ?>
                                     </p>
-                                    <?php endif; ?>
+                                    <?php } ?>
                                 </div>
 
                                 <!-- Mô tả -->
                                 <div class="form-group col-6">
-                                    <label for="description">Mô tả</label>
-                                    <textarea name="description" id="description" class="form-control"
+                                    <label for="mo_ta">Mô tả</label>
+                                    <textarea name="mo_ta" id="mo_ta" class="form-control"
                                         placeholder="Mô tả"></textarea>
                                 </div>
                             </div>

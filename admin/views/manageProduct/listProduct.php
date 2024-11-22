@@ -15,9 +15,9 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-        <h1><a
-                            href="<?= BASE_URL_ADMIN . '?act=listProduct' ?>">Quản
-                            Lý Sản Phẩm</a></h1>
+          <h1><a
+              href="<?= BASE_URL_ADMIN . '?act=listProduct' ?>">Quản
+              Lý Sản Phẩm</a></h1>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -40,54 +40,51 @@
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Thuộc</th>
+                    <th>Danh mục</th>
                     <th>Tên</th>
+                    <th>Trạng thái</th>
                     <th>Mô tả</th>
-                    <th>Giá tiền</th>
-                    <th>Giá khuyến mãi</th>
                     <th>Ảnh</th>
-                    <th>Ngày nhập</th>
+                    <th>Ẩn hiện</th>
                     <th>Thao tác</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php foreach($listProduct as $product): ?>
                   <tr>
-                    <td><?= $product["id"] ?>
+                    <td><?= $product["sp_id"] ?>
                     </td>
-                    <td><?= $product["name"] ?>
+                    <td><?= $product["dm_id"] ?>
                     </td>
-                    <td><?= $product["title"] ?>
-                    </td>
-                    <td>
-                      <?= $product["description"] !== '' ? "Có mô tả, vào chi tiết để xem" : "Không có mô tả" ?>
+                    <td><?= $product["ten_sp"] ?>
                     </td>
                     <td>
-                      <?= number_format($product["price"])  ?>
+                      <?= $product["trang_thai"] ?>
                     </td>
                     <td>
-                      <?= number_format($product["discount"]) ?>
+                      <?= $product["mo_ta"] !== '' ? "Có mô tả, vào chi tiết để xem" : "Không có mô tả" ?>
                     </td>
+
                     <td>
                       <!-- Hiển thị ảnh sản phẩm với kích thước 100px -->
                       <img
-                        src="<?= BASE_URL . $product["thumbnail"] ?>"
+                        src="<?= BASE_URL . $product["img_sp"] ?>"
                         width="100px" alt="Ảnh sản phẩm">
 
                     </td>
                     <td>
-                      <?= $product["update_at"] ?>
+                      <?= $product["an_hien"] ?>
                     </td>
                     <td>
                       <a
-                        href="<?= BASE_URL_ADMIN.'?act=detailProduct&id='.$product['id']; ?>"><button
+                        href="<?= BASE_URL_ADMIN.'?act=detailProduct&id='.$product['sp_id']; ?>"><button
                           class="btn btn-info">Chi tiết</button></a>
 
                       <a
-                        href="<?= BASE_URL_ADMIN.'?act=formEditProduct&id='.$product['id']; ?>"><button
+                        href="<?= BASE_URL_ADMIN.'?act=formEditProduct&id='.$product['sp_id']; ?>"><button
                           class="btn btn-warning">Sửa</button></a>
 
-                      <a href="<?= BASE_URL_ADMIN.'?act=xoaProduct&id='.$product['id']; ?>"
+                      <a href="<?= BASE_URL_ADMIN.'?act=xoaProduct&id='.$product['sp_id']; ?>"
                         onclick="return confirm('Bạn có chắc chắn xóa hay không?')"><button
                           class="btn btn-danger">Xóa</button></a>
                     </td>
@@ -97,13 +94,12 @@
                 <tfoot>
                   <tr>
                     <th>ID</th>
-                    <th>Thuộc</th>
+                    <th>Danh mục</th>
                     <th>Tên</th>
+                    <th>Trạng thái</th>
                     <th>Mô tả</th>
-                    <th>Giá tiền</th>
-                    <th>Giá khuyến mãi</th>
                     <th>Ảnh</th>
-                    <th>Ngày nhập</th>
+                    <th>Ẩn hiện</th>
                     <th>Thao tác</th>
                   </tr>
                 </tfoot>

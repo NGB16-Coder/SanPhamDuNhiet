@@ -23,15 +23,15 @@ class AdminProduct
         }
     }
 
-    public function insertProduct($title, $price, $discount, $update_at, $category_id, $thumbnail, $description)
+    public function insertProduct($ten_sp, $price, $discount, $update_at, $category_id, $thumbnail, $description)
     {
         try {
-            $sql = "INSERT INTO product(category_id, title, description, price, discount, thumbnail, update_at) 
-                    VALUES(:category_id, :title,:description, :price, :discount, :thumbnail, :update_at)";
+            $sql = "INSERT INTO product(category_id, ten_sp, description, price, discount, thumbnail, update_at) 
+                    VALUES(:category_id, :ten_sp,:description, :price, :discount, :thumbnail, :update_at)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':category_id' => $category_id,
-                ':title' => $title,
+                ':ten_sp' => $ten_sp,
                 ':description' => $description,
                 ':price' => $price,
                 ':discount' => $discount,
@@ -61,13 +61,13 @@ class AdminProduct
         }
     }
 
-    public function updateProduct($title, $price, $discount, $update_at, $category_id, $thumbnail, $description, $id)
+    public function updateProduct($ten_sp, $price, $discount, $update_at, $category_id, $thumbnail, $description, $id)
     {
         try {
-            $sql = "UPDATE product SET title=:title, price=:price, discount=:discount, update_at=:update_at, category_id=:category_id, thumbnail=:thumbnail, description=:description WHERE id=:id";
+            $sql = "UPDATE product SET ten_sp=:ten_sp, price=:price, discount=:discount, update_at=:update_at, category_id=:category_id, thumbnail=:thumbnail, description=:description WHERE id=:id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
-                ':title' => $title,
+                ':ten_sp' => $ten_sp,
                 ':price' => $price,
                 ':discount' => $discount,
                 ':update_at' => $update_at,
