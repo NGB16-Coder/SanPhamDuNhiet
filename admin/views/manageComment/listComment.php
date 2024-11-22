@@ -8,6 +8,10 @@
 
 <!-- Main Sidebar Container -->
 <?php include './views/layout/sidebar.php' ?>
+<style>
+   <?= $Comment['an_hien'] == 1 ? 'red' : 'black'; ?>;"
+
+</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -32,45 +36,58 @@
           <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped" style="text-align:center;">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Nội Dung</th>
-                    <th>Ngày Bình Luận</th>
-                    <th>Ngày update</th>
-                    <th>Chức Năng</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php foreach ($listComment as $Comment): ?>
-                  <tr>
-                    <td><?= $Comment['bl_id'] ?>
-                    </td>
-                    <td><?= $Comment['noi_dung'] ?>
-                    <td><?= $Comment['ngay_tao'] ?>
-                    </td>
-                    <td><?= $Comment['ngay_update'] ?>
-                    </td> 
-                    <td>
-                      <a href="<?= BASE_URL_ADMIN .'?act=deleteComment&id='.$Comment['bl_id'] ?>"
-                        onclick="return confirm('Bạn có chắc chắn xóa hay không?')"><button
-                          class="btn btn-danger">Xóa</button></a>
-                    </td>
+           <!-- Nội dung trang quản lý bình luận -->
+<table id="example1" class="table table-bordered table-striped" style="text-align:center;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nội Dung</th>
+            <th>Trạng Thái</th>
+            <th>Ngày Bình Luận</th>
+            <th>Ngày Cập Nhật</th>
+            <th>Chức Năng</th>
+        </tr>
+    </thead>
+    <tbody>
+  <?php foreach ($listComment as $Comment): ?>
+  <tr>
+    <td><?= $Comment['bl_id'] ?></td>
+    <td style="color: <?= $Comment['an_hien'] == 0 ? 'red' : 'black'; ?>;">
+      <?= $Comment['noi_dung'] ?>
+    </td>
+    <td><?= $Comment['an_hien'] ?></td>
+    <td><?= $Comment['ngay_tao'] ?></td>
+    <td><?= $Comment['ngay_update'] ?></td>
+    <td>
+      <!-- Nút Ẩn -->
+      <?php if ($Comment['an_hien'] == 1): ?>
+        <a href="<?= BASE_URL_ADMIN . '?act=hideComment&id=' . $Comment['bl_id'] ?>" 
+           onclick="return confirm('Bạn có chắc chắn ẩn bình luận này?')">
+          <button class="btn btn-warning btn-sm">Ẩn</button>
+        </a>
+      <?php else: ?>
+        <!-- Nút Hiện -->
+        <a href="<?= BASE_URL_ADMIN . '?act=showComment&id=' . $Comment['bl_id'] ?>" 
+           onclick="return confirm('Bạn có chắc chắn hiện bình luận này?')">
+          <button class="btn btn-success btn-sm">Hiện</button>
+        </a>
+      <?php endif; ?>
+    </td>
+  </tr>
+  <?php endforeach; ?>
+</tbody>
 
-                  </tr>
-                  <?php endforeach ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                    <th>ID</th>
-                    <th>Nội Dung</th>
-                    <th>Ngày Bình Luận</th>
-                    <th>Ngày update</th>
-                    <th>Chức Năng</th>
-                  </tr>
-                </tfoot>
-              </table>
+    <tfoot>
+        <tr>
+            <th>ID</th>
+            <th>Nội Dung</th>
+            <th>Ngày Bình Luận</th>
+            <th>Ngày Cập Nhật</th>
+            <th>Trạng Thái</th>
+            <th>Chức Năng</th>
+        </tr>
+    </tfoot>
+</table>
             </div>
             <!-- /.card-body -->
 
