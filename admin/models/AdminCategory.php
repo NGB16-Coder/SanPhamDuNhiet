@@ -35,13 +35,13 @@ class AdminCategory
         }
     }
 
-    public function getDetailCategory($id)
+    public function getDetailCategory($dm_id)
     {
         try {
-            $sql = "SELECT * FROM danh_muc WHERE id = :id";
+            $sql = "SELECT * FROM danh_muc WHERE dm_id = :dm_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
-                ':id' => $id
+                ':dm_id' => $dm_id
             ]);
             return $stmt->fetch();
         } catch (Exception $e) {
@@ -49,14 +49,14 @@ class AdminCategory
         }
     }
 
-    public function updateCategory($id, $name)
+    public function updateCategory($dm_id, $ten_dm)
     {
         try {
-            $sql = "UPDATE danh_muc SET name=:name WHERE id=:id";
+            $sql = "UPDATE danh_muc SET ten_dm=:ten_dm WHERE dm_id=:dm_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
-                ':name' => $name,
-                ':id' => $id
+                ':ten_dm' => $ten_dm,
+                ':dm_id' => $dm_id
             ]);
             return true;
         } catch (Exception $e) {
@@ -64,13 +64,13 @@ class AdminCategory
         }
     }
 
-    public function deleteCategory($id)
+    public function deleteCategory($dm_id)
     {
         try {
-            $sql = "DELETE FROM danh_muc WHERE id=:id AND cate";
+            $sql = "DELETE FROM danh_muc WHERE dm_id=:dm_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
-                ':id' => $id
+                ':dm_id' => $dm_id
             ]);
             return true;
         } catch (Exception $e) {

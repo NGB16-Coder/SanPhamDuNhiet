@@ -36,20 +36,20 @@
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form
-                            action="<?= BASE_URL_ADMIN.'?act=editCategory'; ?>"
+                            action="<?= BASE_URL_ADMIN.'?act=editCategory' ?>"
                             method="post">
-                            <input type="text" name="id"
-                                value="<?=$category['id']?>"
+                            <input type="text" name="dm_id"
+                                value="<?=$category['dm_id']?>"
                                 hidden>
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputCategory">Tên danh mục</label>
-                                    <input type="text" class="form-control" name="name" id="exampleInputCategory"
+                                    <input type="text" class="form-control" name="ten_dm" id="exampleInputCategory"
                                         placeholder="Nhập tên danh mục"
-                                        value="<?=$category['name']?>">
-                                    <?php if (isset($_SESSION['error']['name'])) { ?>
+                                        value="<?=$category['ten_dm']?>">
+                                    <?php if (isset($_SESSION['error']['ten_dm'])) { ?>
                                     <p class="text-danger">
-                                        <?= $_SESSION['error']['name'] ?>
+                                        <?= $_SESSION['error']['ten_dm'] ?>
                                     </p>
                                     <?php } ?>
                                 </div>
