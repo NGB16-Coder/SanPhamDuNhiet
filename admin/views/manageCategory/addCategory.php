@@ -15,7 +15,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                <h1><a
+                    <h1><a
                             href="<?= BASE_URL_ADMIN . '?act=listCategory' ?>">Quản
                             Lý Danh Mục</a></h1>
                 </div>
@@ -36,16 +36,16 @@
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form
-                            action="<?= BASE_URL_ADMIN.'?act=addCategory'; ?>"
+                            action="<?= BASE_URL_ADMIN.'?act=addCategory' ?>"
                             method="post">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputCategory">Tên danh mục</label>
-                                    <input type="text" class="form-control" name="name" id="exampleInputCategory"
+                                    <input type="text" class="form-control" name="ten_dm" id="exampleInputCategory"
                                         placeholder="Nhập tên danh mục">
-                                    <?php if (isset($_SESSION['error']['name'])) { ?>
+                                    <?php if (isset($_SESSION['error']['ten_dm'])) { ?>
                                     <p class="text-danger">
-                                        <?= $_SESSION['error']['name'] ?>
+                                        <?= $_SESSION['error']['ten_dm'] ?>
                                     </p>
                                     <?php } ?>
                                 </div>

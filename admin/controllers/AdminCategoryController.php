@@ -29,12 +29,12 @@ class AdminCategoryController
         // kiểm tra xem dữ liệu có submit vào không
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // lấy ra dữ liệu
-            $name = $_POST['name'];
+            $ten_dm = $_POST['ten_dm'];
 
             // Tạo 1 mảng trống để chứa dữ liệu
             $errors = [];
-            if (empty($name)) {
-                $errors['name'] = 'Tên danh mục không được để trống!';
+            if (empty($ten_dm)) {
+                $errors['ten_dm'] = 'Tên danh mục không được để trống!';
             }
 
             $_SESSION['error'] = $errors; // Lưu biến lỗi
@@ -42,7 +42,7 @@ class AdminCategoryController
             // Nếu không lỗi thì tiến hành thêm danh mục
             if (empty($errors)) {
                 // Nếu errors rỗng thì tiến hành thêm
-                $this->modelCategory->insertCategory($name);
+                $this->modelCategory->insertCategory($ten_dm);
                 header('location: ' . BASE_URL_ADMIN . '?act=listCategory');
                 exit();
             } else {
@@ -61,8 +61,8 @@ class AdminCategoryController
         /* dùng để hiển thị Form nhập */
 
         // Lấy ra thông tindanh mục cần sửa
-        $id = $_GET['id'];
-        $category = $this->modelCategory->getDetailCategory($id);
+        $dm_id = $_GET['id'];
+        $category = $this->modelCategory->getDetailCategory($dm_id);
         if ($category) {
             require_once "./views/manageCategory/editCategory.php";
 
@@ -79,23 +79,23 @@ class AdminCategoryController
         // kiểm tra xem dữ liệu có submit vào không
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // lấy ra dữ liệu
-            $id = $_POST['id'];
-            $name = $_POST['name'];
+            $dm_id = $_POST['dm_id'];
+            $ten_dm = $_POST['ten_dm'];
 
             // Tạo 1 mảng trống để chứa dữ liệu
             $errors = [];
-            if (empty($name)) {
-                $errors['name'] = 'Tên danh mục không được để trống!';
+            if (empty($ten_dm)) {
+                $errors['ten_dm'] = 'Tên danh mục không được để trống!';
             }
             // Nếu không lỗi thì tiến hành Sửa danh mục
             if (empty($errors)) {
                 // Nếu errors rỗng thì tiến hành Sửa
-                $this->modelCategory->updateCategory($id, $name);
+                $this->modelCategory->updateCategory($dm_id, $ten_dm);
                 header('location: ' . BASE_URL_ADMIN . '?act=listCategory');
                 exit();
             } else {
                 // Trả về form và lỗi
-                $category = ['id' => $id, 'name' => $name];
+                $category = ['dm_id' => $dm_id, 'ten_dm' => $ten_dm];
 
                 require_once "./views/manageCategory/editCategory.php";
             }
@@ -105,10 +105,10 @@ class AdminCategoryController
     public function xoaCategory()
     {
         // Lấy ra thông tin danh mục cần xóa
-        $id = $_GET['id'];
-        $category = $this->modelCategory->getDetailCategory($id);
-        if ($id) {
-            $this->modelCategory->deleteCategory($id);
+        $dm_id = $_GET['id'];
+        $category = $this->modelCategory->getDetailCategory($dm_id);
+        if ($dm_id) {
+            $this->modelCategory->deleteCategory($dm_id);
             header('location: '.BASE_URL_ADMIN.'?act=listCategory');
             exit();
         } else {
