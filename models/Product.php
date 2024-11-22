@@ -25,16 +25,16 @@ class Product
         }
     }
 
-    public function getDetailProduct($id)
+    public function getDetailProduct($sp_id)
     {
         try {
-            $sql = "SELECT product.*, category.name 
-            FROM product 
-            INNER JOIN category ON product.category_id = category.id 
-            WHERE product.id = :id";
+            $sql = "SELECT san_pham.*, danh_muc.name 
+            FROM san_pham 
+            INNER JOIN danh_muc ON san_pham.danh_muc_id = danh_muc.id 
+            WHERE san_pham.sp_id = :dm_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
-                ':id' => $id
+                ':sp_id' => $sp_id
             ]);
             return $stmt->fetch();
         } catch (Exception $e) {

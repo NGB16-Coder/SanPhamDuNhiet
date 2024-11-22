@@ -65,5 +65,6 @@ match ($act) {
 
     //router bình luận
     'listComment' => (new AdminCommentController())->listComment(),
-    'deleteComment' => (new AdminCommentController())->deleteComment(),
+     'hideComment' => (new AdminCommentController())->hideComment(),
+    'showComment' => (new AdminCommentController())->showComment(),
 };
