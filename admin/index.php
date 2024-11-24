@@ -21,6 +21,7 @@ require_once './models/AdminProduct.php';
 require_once './models/AdminUser.php';
 require_once './models/AdminEvaluation.php';
 require_once './models/AdminComment.php';
+require_once './models/AdminSize.php';
 
 
 // Route
@@ -65,6 +66,6 @@ match ($act) {
 
     //router bình luận
     'listComment' => (new AdminCommentController())->listComment(),
-     'hideComment' => (new AdminCommentController())->hideComment(),
     'showComment' => (new AdminCommentController())->showComment(),
+    'hideComment' => (new AdminCommentController())->hideComment(),
 };

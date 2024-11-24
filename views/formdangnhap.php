@@ -107,7 +107,7 @@
                                     </div>
                                     <?php if (isset($_SESSION['error'])) { ?>
                                     <p style="font-size:1.2vw" class="text-danger">
-                                        <?= $_SESSION['error'] ?>
+                                        <?= $_SESSION['error']?>
                                     </p>
                                     <?php }?>
                                 </form>
