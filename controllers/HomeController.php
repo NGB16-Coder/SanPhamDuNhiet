@@ -64,7 +64,7 @@ class HomeController
                 exit();
             } else {
                 // Lỗi thì lưu vào session
-                $_SESSION['error'] = $taikhoan ?? '';
+                $_SESSION['error'] = $taikhoan ?? null;
 
                 $_SESSION['flash'] = true;
                 header('location:'.BASE_URL . '?act=dang-nhap');

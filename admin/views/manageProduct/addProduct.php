@@ -114,15 +114,12 @@
                                     <select class="form-control" name="size_id" id="size_id">
                                         <option selected disabled>Chọn size sản phẩm</option>
 
-                                        <option value="1">
-                                            M
+                                        <?php foreach ($listSize as $size): ?>
+                                        <option
+                                            value="<?= $size['size_id'] ?>">
+                                            <?= $size['size_value'] ?>
                                         </option>
-                                        <option value="2">
-                                            L
-                                        </option>
-                                        <option value="3">
-                                            XL
-                                        </option>
+                                        <?php endforeach; ?>
 
                                     </select>
                                     <?php if (isset($_SESSION['error']['size_id'])) { ?>
@@ -132,11 +129,27 @@
                                     <?php } ?>
                                 </div>
 
-                                <!-- Mô tả -->
+                                <!-- Số lượng -->
                                 <div class="form-group col-6">
-                                    <label for="mo_ta">Mô tả</label>
-                                    <textarea name="mo_ta" id="mo_ta" class="form-control"
-                                        placeholder="Mô tả"></textarea>
+                                    <label for="so_luong">Số lượng</label>
+                                    <input type="number" name="so_luong" min="0" class="form-control" id="so_luong"
+                                        placeholder="Số lượng">
+                                    <?php if (isset($_SESSION['error']['so_luong'])) { ?>
+                                    <p class="text-danger">
+                                        <?= $_SESSION['error']['so_luong'] ?>
+                                    </p>
+                                    <?php } ?>
+                                </div>
+                                <!-- Mô tả -->
+                                <div class="form-group col-12">
+                                    <label for="mo_ta">Mô tả Sản Phẩm</label>
+                                    <input type="text" name="mo_ta" class="form-control" id="mo_ta"
+                                        placeholder="Mô tả Sản Phẩm">
+                                    <?php if (isset($_SESSION['error']['mo_ta'])) { ?>
+                                    <p class="text-danger">
+                                        <?= $_SESSION['error']['mo_ta'] ?>
+                                    </p>
+                                    <?php } ?>
                                 </div>
                             </div>
 

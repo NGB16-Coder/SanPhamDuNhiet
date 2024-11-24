@@ -42,10 +42,13 @@
                     <th>ID</th>
                     <th>Danh mục</th>
                     <th>Tên</th>
-                    <th>Trạng thái</th>
-                    <th>Mô tả</th>
                     <th>Ảnh</th>
-                    <th>Ẩn hiện</th>
+                    <th>Giá</th>
+                    <th>Giá KM</th>
+                    <th>Số lượng</th>
+                    <th>Size</th>
+                    <th>Trạng thái</th>
+                    <!--<th>Mô tả</th> -->
                     <th>Thao tác</th>
                   </tr>
                 </thead>
@@ -54,17 +57,10 @@
                   <tr>
                     <td><?= $product["sp_id"] ?>
                     </td>
-                    <td><?= $product["dm_id"] ?>
+                    <td><?= $product["ten_dm"] ?>
                     </td>
                     <td><?= $product["ten_sp"] ?>
                     </td>
-                    <td>
-                      <?= $product["trang_thai"] ?>
-                    </td>
-                    <td>
-                      <?= $product["mo_ta"] !== '' ? "Có mô tả, vào chi tiết để xem" : "Không có mô tả" ?>
-                    </td>
-
                     <td>
                       <!-- Hiển thị ảnh sản phẩm với kích thước 100px -->
                       <img
@@ -73,8 +69,23 @@
 
                     </td>
                     <td>
-                      <?= $product["an_hien"] ?>
+                      <?= number_format($product["gia_sp"]) ?>
                     </td>
+                    <td>
+                      <?= number_format($product["km_sp"]) ?>
+                    </td>
+                    <td>
+                      <?= number_format($product["so_luong"]) ?>
+                    </td>
+                    <td>
+                      <?= $product["size_value"] ?>
+                    </td>
+                    <td>
+                      <?= $product["so_luong"] > 0 ? "<p style='color:green;'>Còn hàng</p>" : "<p style='color:red; font-weight:700;'>Hết hàng</p>" ?>
+                    </td>
+                    <!-- <td>
+                       //$product["mo_ta"] !== '' ? "Có mô tả, vào chi tiết để xem" : "Không có mô tả" ?>
+                    </td> -->
                     <td>
                       <a
                         href="<?= BASE_URL_ADMIN.'?act=detailProduct&id='.$product['sp_id']; ?>"><button
@@ -96,10 +107,13 @@
                     <th>ID</th>
                     <th>Danh mục</th>
                     <th>Tên</th>
-                    <th>Trạng thái</th>
-                    <th>Mô tả</th>
                     <th>Ảnh</th>
-                    <th>Ẩn hiện</th>
+                    <th>Giá</th>
+                    <th>Giá KM</th>
+                    <th>Số lượng</th>
+                    <th>Size</th>
+                    <th>Trạng thái</th>
+                    <!-- <th>Mô tả</th> -->
                     <th>Thao tác</th>
                   </tr>
                 </tfoot>

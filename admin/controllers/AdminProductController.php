@@ -4,15 +4,18 @@ class AdminProductController
 {
     public $modelProduct;
     public $modelCategory;
+    public $modelSize;
 
     public function __construct()
     {
         $this->modelProduct = new AdminProduct();
         $this->modelCategory = new AdminCategory();
+        $this->modelSize = new AdminSize();
     }
     public function listProduct()
     {
         $listProduct = $this->modelProduct->getAllProduct();
+        $listSize = $this->modelSize->getAllSize(); // lấy dữ liệu vào mục size
         require_once "./views/manageProduct/listProduct.php";
     }
 
@@ -21,6 +24,8 @@ class AdminProductController
         // dùng để hiển thị Form nhập
 
         $listCategory = $this->modelCategory->getAllCategory(); // lấy dữ liệu vào mục thuộc danh mục
+        $listSize = $this->modelSize->getAllSize(); // lấy dữ liệu vào mục size
+        // $listProduct = $this->modelProduct->getAllProduct();
 
         require_once "./views/manageProduct/addProduct.php";
         deleteSessionError(); // xóa session sau khi load trang
@@ -32,44 +37,49 @@ class AdminProductController
         // kiểm tra xem dữ liệu có submit vào không
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // lấy ra dữ liệu
-            $category_id = $_POST['category_id'] ?? '';
-            $title = $_POST['title'] ?? '';
-            $description = $_POST['description'] ?? '';
-            $price = $_POST['price'] ?? '';
-            $discount = $_POST['discount'] ?? '';
-            $thumbnail = $_FILES['thumbnail'] ?? null;
-            $update_at = $_POST['update_at'] ?? '';
+            $dm_id = $_POST['dm_id'] ?? '';
+            $ten_sp = $_POST['ten_sp'] ?? '';
+            $mo_ta = $_POST['mo_ta'] ?? '';
+            $gia_sp = $_POST['gia_sp'] ?? '';
+            $km_sp = $_POST['km_sp'] ?? '';
+            $img_sp = $_FILES['img_sp'] ?? null;
+            $so_luong = $_POST['so_luong'] ?? '';
+            $size_id = $_POST['size_id'] ?? '';
 
             // Lưu hình ảnh vào
-            $file_thumb = uploadFile($thumbnail, 'uploads/');
+            $file_thumb = uploadFile($img_sp, 'assets/img/product/');
 
 
             // Tạo 1 mảng trống để chứa dữ liệu
             $errors = [];
-            if (empty($category_id)) {
-                $errors['category_id'] = 'Bắt buộc chọn sản phẩm thuộc danh mục!';
+            if (empty($dm_id)) {
+                $errors['dm_id'] = 'Bắt buộc chọn sản phẩm thuộc danh mục!';
             }
-            if (empty($title)) {
-                $errors['title'] = 'Tên sản phẩm không được để trống!';
+            if (empty($ten_sp)) {
+                $errors['ten_sp'] = 'Tên sản phẩm không được để trống!';
             }
-            if (empty($price)) {
-                $errors['price'] = 'Giá sản phẩm không được để trống!';
+            if (empty($gia_sp)) {
+                $errors['gia_sp'] = 'Giá sản phẩm không được để trống!';
             }
-            if (empty($discount)) {
-                $errors['discount'] = 'Khuyến mãi sản phẩm không được để trống!';
+            if (empty($km_sp)) {
+                $errors['km_sp'] = 'Khuyến mãi sản phẩm không được để trống!';
             }
-            if ($thumbnail['error'] !== 0) {
-                $errors['thumbnail'] = 'Bắt buộc chọn ảnh sản phẩm!';
+            if ($img_sp['error'] !== 0) {
+                $errors['img_sp'] = 'Bắt buộc chọn ảnh sản phẩm!';
             }
-            if (empty($update_at)) {
-                $errors['update_at'] = 'Ngày nhập sản phẩm bắt buộc nhập!';
+            if (empty($so_luong)) {
+                $errors['so_luong'] = 'Số lượng sản phẩm bắt buộc nhập!';
             }
-            $_SESSION['error'] = $errors; // Lưu biến lỗi
+            if (empty($size_id)) {
+                $errors['size_id'] = 'Size sản phẩm bắt buộc chọn!';
+            }
 
+
+            $_SESSION['error'] = $errors; // Lưu biến lỗi
             // Nếu không lỗi thì tiến hành thêm sản phẩm
             if (empty($errors)) {
                 // Nếu errors rỗng thì tiến hành thêm
-                $this->modelProduct->insertProduct($title, $price, $discount, $update_at, $category_id, $file_thumb, $description);
+                $this->modelProduct->insertProduct($ten_sp, $gia_sp, $km_sp, $so_luong, $dm_id, $file_thumb, $mo_ta, $size_id);
                 header('location:' . BASE_URL_ADMIN . '?act=listProduct');
                 exit();
             } else {
@@ -92,9 +102,13 @@ class AdminProductController
         /* dùng để hiển thị Form nhập */
 
         // Lấy ra thông tin sản phẩm cần sửa
+        $listProduct = $this->modelProduct->getAllProduct();
         $listCategory = $this->modelCategory->getAllCategory(); // lấy dữ liệu vào mục thuộc danh mục
-        $id = $_GET['id'];
-        $product = $this->modelProduct->getDetailProduct($id);
+        $listSize = $this->modelSize->getAllSize(); // lấy dữ liệu vào mục size
+        $sp_id = $_GET['id'];
+        // var_dump($sp_id);
+        // die;
+        $product = $this->modelProduct->getDetailProduct($sp_id);
         if ($product) {
             require_once "./views/manageProduct/editProduct.php";
             deleteSessionError();
@@ -111,47 +125,28 @@ class AdminProductController
         // kiểm tra xem dữ liệu có submit vào không
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // lấy dữ liệu cũ của sản phẩm
-            $id = $_POST['id'] ?? '';
+            $sp_id = (int)$_POST['sp_id'] ?? '';
             // truy vấn
-            $productOld = $this->modelProduct->getDetailProduct($id);
-            $old_file = $productOld['thumbnail']; // lấy ảnh cũ sửa ảnh
-
+            $productOld = $this->modelProduct->getDetailProduct($sp_id);
+            $old_file = $productOld['img_sp']; // lấy ảnh cũ sửa ảnh
 
             // lấy ra dữ liệu
-            $category_id = $_POST['category_id'] ?? '';
-            $title = $_POST['title'] ?? '';
-            $description = $_POST['description'] ?? '';
-            $price = $_POST['price'] ?? '';
-            $discount = $_POST['discount'] ?? '';
-            $thumbnail = $_FILES['thumbnail'] ?? null;
-            $update_at = $_POST['update_at'] ?? '';
-            // var_dump($thumbnail);
-            // die;
+            $dm_id = (int)$_POST['dm_id'] ?? '';
+            $ten_sp = $_POST['ten_sp'] ?? '';
+            $mo_ta = $_POST['mo_ta'] ?? '';
+            $gia_sp = (int)$_POST['gia_sp'] ?? '';
+            $km_sp = (int)$_POST['km_sp'] ?? '';
+            $img_sp = $_FILES['img_sp'] ?? null;
+            $so_luong = (int)$_POST['so_luong'] ?? '';
+
             // Tạo 1 mảng trống để chứa dữ liệu
             $errors = [];
-            if (empty($category_id)) {
-                $errors['category_id'] = 'Bắt buộc chọn sản phẩm thuộc danh mục!';
-            }
-            if (empty($title)) {
-                $errors['title'] = 'Tên sản phẩm không được để trống!';
-            }
-            if (empty($price)) {
-                $errors['price'] = 'Giá sản phẩm không được để trống!';
-            }
-            if (empty($discount)) {
-                $errors['discount'] = 'Khuyến mãi sản phẩm không được để trống!';
-            }
-            if (empty($update_at)) {
-                $errors['update_at'] = 'Ngày nhập sản phẩm bắt buộc nhập!';
-            }
-
             $_SESSION['error'] = $errors; // Lưu biến lỗi
 
             // logic sửa ảnh
-            if (isset($thumbnail) && $thumbnail['error'] == UPLOAD_ERR_OK) {
+            if (isset($img_sp) && $img_sp['error'] == UPLOAD_ERR_OK) {
                 // upload ảnh mới lên
-                $new_file = uploadFile($thumbnail, 'uploads/');
-
+                $new_file = uploadFile($img_sp, 'assets/img/product/');
                 // nếu có ảnh cũ thì xóa đi
                 if (!empty($old_file)) {
                     deleteFile($old_file);
@@ -159,13 +154,13 @@ class AdminProductController
             } else {
                 $new_file = $old_file; // nếu không có ảnh mới thì giữ nguyên ảnh cũ
             }
-
+            // print_r($new_file);
+            // die;
             // Nếu không lỗi thì tiến hành thêm sản phẩm
             if (empty($errors)) {
                 // Nếu errors rỗng thì tiến hành thêm
-                $this->modelProduct->updateProduct($title, $price, $discount, $update_at, $category_id, $new_file, $description, $id);
-                // var_dump($new_file);
-                // die;
+
+                $this->modelProduct->updateProduct($ten_sp, $mo_ta, $new_file, $dm_id, $gia_sp, $km_sp, $so_luong, $sp_id);
                 header('location:' . BASE_URL_ADMIN . '?act=listProduct');
                 exit();
             } else {
@@ -174,7 +169,7 @@ class AdminProductController
                 // Đặt chỉ thị xóa session sau khi hiển thị form
                 $_SESSION['flash'] = true;
 
-                header('location:' . BASE_URL_ADMIN . '?act=formEditProduct&id='.$id);
+                header('location:' . BASE_URL_ADMIN . '?act=formEditProduct&id='.$sp_id);
                 exit();
 
 
@@ -185,12 +180,12 @@ class AdminProductController
     public function xoaProduct()
     {
         // Lấy ra thông tin sản phẩm cần xóa
-        $id = $_GET['id'];
-        $product = $this->modelProduct->getDetailProduct($id);
+        $sp_id = $_GET['id'];
+        $product = $this->modelProduct->getDetailProduct($sp_id);
 
         if ($product) {
-            deleteFile($product['thumbnail']);
-            $this->modelProduct->deleteProduct($id);
+            deleteFile($product['img_sp']);
+            $this->modelProduct->deleteProduct($sp_id);
         }
         header('location: '.BASE_URL_ADMIN.'?act=listProduct');
         exit();
