@@ -64,7 +64,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN ?>" class="nav-link">
+          <a href="<?= BASE_URL_ADMIN.'?act=listOrder' ?>" class="nav-link">
             <img style="width:24px;height:24px;" src="https://img.icons8.com/?size=100&id=7979&format=png&color=000000">
             Quản lý đơn hàng
           </a>
