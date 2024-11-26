@@ -188,7 +188,7 @@
 
                                 <div class="boxsp mr row">
                                     <div class="img" style="width:25%;">
-                                        <a href="">
+                                        <a href="<?= BASE_URL.'?act=chitietsanpham'?>">
                                             <img src="./assets/img/product/coc1.png" alt="Ảnh sản phẩm">
                                             <p>
                                                 <span

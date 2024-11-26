@@ -22,7 +22,6 @@ require_once './models/AdminProduct.php';
 require_once './models/AdminUser.php';
 require_once './models/AdminEvaluation.php';
 require_once './models/AdminComment.php';
-require_once './models/AdminOrder.php';
 
 
 // Route
@@ -68,9 +67,4 @@ match ($act) {
     //router bình luận
     'listComment' => (new AdminCommentController())->listComment(),
     'deleteComment' => (new AdminCommentController())->deleteComment(),
-    //router Don Hang
-    'listOrder' => (new AdminOrderController())->listOrder(),
-    'editOrder' => (new AdminOrderController())->editOrder(),
-
-   
 };

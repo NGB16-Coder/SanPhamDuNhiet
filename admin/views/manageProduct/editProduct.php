@@ -1,13 +1,15 @@
-<!-- Header-->
-<?php include './views/layout/header.php' ?>
-<!-- EndHeader-->
+<!-- Header -->
+<?php require './views/layout/header.php'; ?>
+<!-- End Header -->
 
 <!-- Navbar -->
-<?php include './views/layout/navbar.php' ?>
-<!-- /.navbar -->
+<?php include './views/layout/navbar.php'; ?>
+<!-- End Navbar -->
 
-<!-- Main Sidebar Container -->
-<?php include './views/layout/sidebar.php' ?>
+<!-- Sidebar -->
+<?php include './views/layout/sidebar.php'; ?>
+<!-- End Sidebar -->
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -19,8 +21,9 @@
                             href="<?= BASE_URL_ADMIN . '?act=listProduct' ?>">Quản
                             Lý Sản Phẩm</a></h1>
                 </div>
+
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
 
     <!-- Main content -->
@@ -28,163 +31,132 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Sửa thông tin của sản phẩm: &ensp;
-                                <?= $product['title'] ?>
-                            </h3>
+                            <h3 class="card-title">Sửa Sản Phẩm</h3>
+
                         </div>
-                        <!-- /.card-header -->
                         <!-- form start -->
                         <form
-                            action="<?= BASE_URL_ADMIN.'?act=editProduct'; ?>"
+                            action="<?= BASE_URL_ADMIN .'?act=editProduct' ?>"
                             method="post" enctype="multipart/form-data">
-                            <input type="text" name="id"
-                                value="<?=$product['id']?>"
-                                hidden>
                             <div class="card-body row">
-                                <div class="form-group col-6">
-                                    <label for="exampleInputProduct">Tên sản phẩm</label>
-                                    <input type="text" class="form-control" name="title" id="exampleInputProduct"
-                                        value="<?=$product['title']?>">
-                                    <?php if (isset($_SESSION['error']['title'])) { ?>
+                                <input type="number" name="sp_id"
+                                    value="<?=$product['sp_id']?>"
+                                    readonly hidden>
+                                <!-- Tên sản phẩm -->
+                                <div class="form-group col-12">
+                                    <label for="ten_sp">Tên Sản Phẩm</label>
+                                    <input
+                                        value="<?= $product['ten_sp'] ?>"
+                                        type="text" name="ten_sp" class="form-control" id="ten_sp"
+                                        placeholder="Tên Sản Phẩm">
+                                    <?php if (isset($_SESSION['error']['ten_sp'])) { ?>
                                     <p class="text-danger">
-                                        <?= $_SESSION['error']['title'] ?>
+                                        <?= $_SESSION['error']['ten_sp'] ?>
                                     </p>
                                     <?php } ?>
                                 </div>
+
+                                <!-- Giá -->
                                 <div class="form-group col-6">
-                                    <label for="category_id">Thuộc Danh Mục</label>
-                                    <select class="form-control" name="category_id" id="category_id">
+                                    <label for="gia_sp">Giá Sản Phẩm</label>
+                                    <input
+                                        value="<?= $product['gia_sp'] ?>"
+                                        type="number" name="gia_sp" min="0" class="form-control" id="gia_sp"
+                                        placeholder="Giá">
+                                    <?php if (isset($_SESSION['error']['gia_sp'])) { ?>
+                                    <p class="text-danger">
+                                        <?= $_SESSION['error']['gia_sp'] ?>
+                                    </p>
+                                    <?php } ?>
+                                </div>
+
+                                <!-- Giá khuyến mãi -->
+                                <div class="form-group col-6">
+                                    <label for="km_sp">Giá Khuyến Mãi</label>
+                                    <input
+                                        value="<?= $product['km_sp'] ?>"
+                                        type="number" name="km_sp" min="0" class="form-control" id="km_sp"
+                                        placeholder="Giá Khuyến Mãi">
+                                    <?php if (isset($_SESSION['error']['km_sp'])) { ?>
+                                    <p class="text-danger">
+                                        <?= $_SESSION['error']['km_sp'] ?>
+                                    </p>
+                                    <?php } ?>
+                                </div>
+
+                                <!-- Danh mục -->
+                                <div class="form-group col-6">
+                                    <label for="dm_id">Thuộc Danh Mục</label>
+                                    <select class="form-control" name="dm_id" id="dm_id">
                                         <?php foreach ($listCategory as $danhMuc): ?>
-                                        <option <?= $danhMuc['id'] == $product['category_id'] ? 'selected' : '' ?>
-                                            value="<?= $danhMuc['id'] ?>">
-                                            <?= $danhMuc['name'] ?>
+                                        <option <?= $danhMuc['dm_id'] === $product['dm_id'] ? 'selected' : '' ?>
+                                            value="<?= $danhMuc['dm_id'] ?>">
+                                            <?= $danhMuc['ten_dm'] ?>
                                         </option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <?php if (isset($_SESSION['error']['category_id'])) { ?>
+                                    <?php if (isset($_SESSION['error']['dm_id'])) { ?>
                                     <p class="text-danger">
-                                        <?= $_SESSION['error']['category_id'] ?>
+                                        <?= $_SESSION['error']['dm_id'] ?>
                                     </p>
                                     <?php } ?>
                                 </div>
+                                <!-- Số lượng -->
+                                <div class="form-group col-6">
+                                    <label for="so_luong">Số lượng</label>
+                                    <input
+                                        value="<?= $product['so_luong'] ?>"
+                                        type="number" name="so_luong" min="0" class="form-control" id="so_luong"
+                                        placeholder="Số lượng">
+                                    <?php if (isset($_SESSION['error']['so_luong'])) { ?>
+                                    <p class="text-danger">
+                                        <?= $_SESSION['error']['so_luong'] ?>
+                                    </p>
+                                    <?php } ?>
+                                </div>
+                                <!-- Ảnh sản phẩm -->
+                                <div class="mb-3 col-6">
+                                    <label for="img_sp" class="form-label">Ảnh sản phẩm</label>
+                                    <input type="file" name="img_sp" class="form-control" id="img_sp"
+                                        placeholder="Ảnh sản phẩm">
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <div>
+                                        <?php
+                                            $img_sp = $this->modelProduct->getDetailProduct($sp_id);
+if (!empty($img_sp['img_sp'])):?>
+                                        <img src="../<?= $img_sp['img_sp']?>"
+                                            alt="Không có ảnh" style="max-width: 80px; height: auto;">
+                                        <?php endif;?>
+                                    </div>
+                                </div>
+                                <!-- Mô tả -->
                                 <div class="form-group col-12">
-                                    <label for="description">Mô tả sản phẩm</label>
-                                    <input type="text" class="form-control" name="description" id="description"
-                                        value="<?=$product['description']?>">
-                                    <?php if (isset($_SESSION['error']['description'])) { ?>
-                                    <p class="text-danger">
-                                        <?= $_SESSION['error']['description'] ?>
-                                    </p>
-                                    <?php } ?>
-                                </div>
-                                <div class="form-group col-6">
-                                    <label for="price">Giá sản phẩm</label>
-                                    <input type="text" class="form-control" name="price" id="price"
-                                        value="<?=$product['price']?>">
-                                    <?php if (isset($_SESSION['error']['price'])) { ?>
-                                    <p class="text-danger">
-                                        <?= $_SESSION['error']['price'] ?>
-                                    </p>
-                                    <?php } ?>
-                                </div>
-                                <div class="form-group col-6">
-                                    <label for="discount">Giá khuyến mãi</label>
-                                    <input type="text" class="form-control" name="discount" id="discount"
-                                        value="<?=$product['discount']?>">
-                                    <?php if (isset($_SESSION['error']['discount'])) { ?>
-                                    <p class="text-danger">
-                                        <?= $_SESSION['error']['discount'] ?>
-                                    </p>
-                                    <?php } ?>
-                                </div>
-                                <div class="form-group col-6">
-                                    <label for="thumbnail" class="form-label">Ảnh sản phẩm</label>
-                                    <input type="file" name="thumbnail" class="form-control" id="thumbnail">
-                                </div>
-                                <div class="form-group col-6">
-                                    <label for="update_at">Ngày nhập sản phẩm</label>
-                                    <input type="date" class="form-control" name="update_at" id="update_at"
-                                        value="<?=$product['update_at']?>">
-                                    <?php if (isset($_SESSION['error']['update_at'])) { ?>
-                                    <p class="text-danger">
-                                        <?= $_SESSION['error']['update_at'] ?>
-                                    </p>
-                                    <?php } ?>
-                                </div>
+                                    <label for="mo_ta">Mô tả</label>
+                                    <input
+                                        value="<?= $product['mo_ta'] ?>"
+                                        type="text" name="mo_ta" id="mo_ta" class="form-control" placeholder="Mô tả">
 
-                            </div>
-                            <!-- /.card-body -->
-
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                                <!-- Nút submit -->
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Sửa</button>
+                                </div>
                             </div>
                         </form>
+
                     </div>
-
-                    <!-- /.card -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
         </div>
-        <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
+
 <!-- Footer -->
-<?php include './views/layout/footer.php' ?>
-<!-- EndFooter -->
-<!-- Page specific script -->
-<script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
-    // const result = document.querySelector('#result');
-    // const fileInput = document.querySelector('#input');
-
-    //MIME типы изображений
-    // const imgExt = ["image/gif", "image/jpeg", "image/pjpeg", "image/png", "image/svg+xml", "image/tiff"]
-
-    // fileInput.addEventListener('change', function() {
-
-    //     for (let i = 0; i < this.files.length; i++) {
-    //         let file = this.files[i];
-
-    //         if (imgExt.find(f => {
-    //                 return f == file.type
-    //             })) {
-    //             let fileReader = new FileReader();
-
-    //             fileReader.addEventListener('load', e => {
-    //                 let target = e.target || e.srcElement;
-    //                 let text = `<img src="${target.result}" alt="" id="img">`;
-    //                 result.innerHTML += text;
-    //             })
-
-    //             fileReader.readAsDataURL(file);
-    //         }
-    //     }
-
-    // })
-</script>
+<?php include './views/layout/footer.php'; ?>
+<!-- End Footer -->
 
 </body>
 
