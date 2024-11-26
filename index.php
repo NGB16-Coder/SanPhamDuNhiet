@@ -33,4 +33,5 @@ match ($act) {
     'check-dang-ky' => (new HomeController())->dangKy(),
     'dang-xuat' => (new HomeController())->logout(),
     'xoa-ghi-nho' => (new HomeController())->xoaCookie(),
+    'list-san-pham' => (new ListSanPham())->listsanpham(),
 };

@@ -13,6 +13,7 @@ require_once './controllers/HomeAdminController.php';
 require_once './controllers/AdminUserController.php';
 require_once './controllers/AdminEvaluationController.php';
 require_once './controllers/AdminCommentController.php';
+require_once './controllers/AdminOrderController.php';
 
 
 // Require toàn bộ file Models
@@ -21,7 +22,6 @@ require_once './models/AdminProduct.php';
 require_once './models/AdminUser.php';
 require_once './models/AdminEvaluation.php';
 require_once './models/AdminComment.php';
-require_once './models/AdminSize.php';
 
 
 // Route
@@ -66,6 +66,5 @@ match ($act) {
 
     //router bình luận
     'listComment' => (new AdminCommentController())->listComment(),
-    'showComment' => (new AdminCommentController())->showComment(),
-    'hideComment' => (new AdminCommentController())->hideComment(),
+    'deleteComment' => (new AdminCommentController())->deleteComment(),
 };
