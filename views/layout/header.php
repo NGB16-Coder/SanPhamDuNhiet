@@ -40,7 +40,7 @@
                                                 href="<?= BASE_URL?>">trang
                                                 chủ</a>
                                         </li>
-                                        <li class="position-static"><a href="#">bình giữ nhiệt</a>
+                                        <li class="position-static"><a href="">bình giữ nhiệt</a>
                                         </li>
                                         <li><a href="#">cốc giữ nhiệt</a>
                                         </li>
@@ -64,10 +64,13 @@
                             <div class="header-search-container">
                                 <button class="search-trigger d-xl-none d-lg-block"><i
                                         class="pe-7s-search"></i></button>
-                                <form class="header-search-box d-lg-none d-xl-block">
-                                    <input type="text" placeholder="Tìm kiếm sản phẩm" class="header-search-field">
-                                    <button class="header-search-btn"><i class="pe-7s-search"></i></button>
+                                <form class="header-search-box d-lg-none d-xl-block" method="post">
+                                    <input type="text" placeholder="Tìm kiếm sản phẩm" class="header-search-field" name="tKiem" id="tKiem">
+                                    <button class="header-search-btn" id="tKiem"><i class="pe-7s-search"></i></button>
                                 </form>
+                                <?php
+                               
+                                ?>
                             </div>
                             <div class="header-configure-area">
                                 <ul class="nav justify-content-end">
